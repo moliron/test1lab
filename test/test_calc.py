@@ -1,19 +1,55 @@
 from src.calc import Calculator
-
+import pytest
 calc = Calculator()
+@pytest.mark.parametrize(
+        "a,b,expected",
+        [
+            (2,2,4),
+            (-2,-5,10),
+            (-2,-2,4),
+            (-5,5.4,-27),
+            (4,4,16)
+        ]
+)
+def test_multiply (a,b,expected):
+    assert calc.multiply(a,b) == expected 
 
-def test_multiply ():
-    assert calc.multiply(1,1) == 1
-    assert calc.multiply(2,2) == 4
-    assert calc.multiply(3,3) == 9
-    assert calc.multiply(10,-10) == -100
-    assert calc.multiply(5,5) == 25
-    assert calc.multiply(10,5) == 50
+@pytest.mark.parametrize(
+        "v,g,expectedd",
+        [
+            (2,2,1),
+            (3,3,1),
+            (4,2,2),
+            (10,5,2),
+            (20,2,10)
+        ]
+)
+def test_divide (v,g,expectedd):
+    assert calc.divide(v,g) == expectedd
 
-def test_divide ():
-    assert calc.divide(12,2) == 6
-    assert calc.divide(10,10) == 1
-    assert calc.divide(25,5) == 5
-    assert calc.divide(100,1) == 100
-    assert calc.divide(10.9,5) == 2.18
-    
+@pytest.mark.parametrize(
+        "h,p,expecte",
+        [
+            (2,3,5),
+            (3,3,6),
+            (2,2,4),
+            (12,23,35),
+            (20,20,40)
+        ]
+)
+def test_sum (h,p,expecte):
+    assert calc.sum(h,p) == expecte
+
+
+@pytest.mark.parametrize(
+        "s,r,expect",
+        [
+            (100,10,90),
+            (3,3,0),
+            (12,2,10),
+            (10,5,5),
+            (20,20,0)
+        ]
+)
+def test_subtract (s,r,expect):
+    assert calc.subtract(s,r) == expect
